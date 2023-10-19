@@ -141,7 +141,6 @@
         </build>-->
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <!-- 此tag下面的所有plugins都是关于上传jar包的依赖 -->
         <plugins>
             <plugin>
