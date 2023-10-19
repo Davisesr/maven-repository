@@ -153,6 +153,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.5.1</version>
+                <configuration>
+                    <target>1.8</target>
+                    <source>1.8</source>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -200,7 +204,7 @@
                             <repositoryOwner>Davisesr</repositoryOwner> <!-- organization or user name  -->
                             <!-- Use merge or override the content -->
                             <merge>true</merge>
-                            <branch>refs/heads/master</branch>
+                            <branch>refs/heads/main</branch>
                             <outputDirectory>${project.build.directory}/maven-repository</outputDirectory>
                             <!-- 包含outputDirectory标签内填的文件夹中的所有内容 -->
                             <includes>
