@@ -72,8 +72,10 @@
                 <configuration>
                     <target>1.8</target>
                     <source>1.8</source>
+                    <!--排除文件-->
                     <excludes>
                         <exclude>
+	                        <!--此处是为了排除启动项（根据自己的需求改动）-->
                             cn/dujy/mybatis/SpringbootDomeApplication.java
                         </exclude>
                     </excludes>
