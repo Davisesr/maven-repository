@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--项目信息-->
+    <groupId>cn.dujy.mybatis</groupId>
+    <artifactId>spring-boot-mybatis-plus-starter</artifactId>
+    <version>1.0.4</version>
+    <name>spring-boot-mybatis-plus-starter</name>
+    <description>基于 mybatis-plus 的二次开发</description>
+
+    <!--springboot的父工程：管理相当多jar的不冲突的版本-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.5</version>
+    </parent>
+
+    <!--统一版本-->
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <alibaba.druid.version>1.1.6</alibaba.druid.version>
+
+        <mybatis-plus.version>3.3.1</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.3.1</mybatis-plus-generator.version>
+        <velocity-engine-core.version>2.3</velocity-engine-core.version>
+
+        <lombok.version>1.18.24</lombok.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+
+        <fastjson.version>1.2.80</fastjson.version>
+        <swagger2.version>2.9.2</swagger2.version>
+    </properties>
+
+    <!--具体依赖-->
+    <dependencies>
+        <!--starter-web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- MySQL-8 驱动（连接数据库必须） -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!--连接池：阿里的德鲁伊连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${alibaba.druid.version}</version>
+        </dependency>
+
+        <!-- spring-boot整合MyBatis（使用MyBatis时 必需） -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!--        MP代码生成器依赖-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus-generator.version}</version>
+        </dependency>
+        <!--        模板引擎依赖-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>${velocity-engine-core.version}</version>
+        </dependency>
+
+        <!--mapstruct：dto 与 domain 转换-->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <!-- lombok版本 >= 1.18.16 需要这个才能使lombok和mapstruct结合使用-->
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-mapstruct-binding</artifactId>
+            <version>${lombok-mapstruct-binding.version}</version>
+        </dependency>
+
+        <!-- Swagger2 核心依赖 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <!--fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!--打包配置-->
+    <build>
+        <!-- 用于打标准的maven包，并上传至GitHub -->
+        <plugins>
+
+            <!--用于编译Java源代码。该插件允许你在Maven项目中定义和配置Java编译的行为，包括源代码版本、目标字节码版本等-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+
+            <!--用于编译Java源代码。该插件允许你在Maven项目中定义和配置Java编译的行为，包括源代码版本、目标字节码版本等-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <target>1.8</target>
+                    <source>1.8</source>
+                    <excludes>
+                        <exclude>
+                            cn/dujy/mybatis/SpringbootDomeApplication.java
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!--用于生成并管理项目的源代码（通常是Java源代码）和附带的源代码JAR文件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--用于将构建产物（通常是JAR文件、WAR文件等）部署到指定Maven仓库-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <configuration>
+                    <!-- 配置本地打包后的本地仓库存储地址，后续上传jar包会从此仓库中去取 -->
+                    <altDeploymentRepository>
+                        internal.repo::default::file://${project.build.directory}/maven-repository
+                    </altDeploymentRepository>
+                </configuration>
+            </plugin>
+
+            <!--用于发布到指定仓库-->
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                        <configuration>
+                            <!--服务名（settings.xml中配置内容，详情请看最底部）-->
+                            <server>dujy-github</server>
+                            <!-- 提交消息（commit message）-->
+                            <message>Maven artifacts for 【${project.artifactId}-${project.version}】</message>
+                            <!-- 上传网站的位置（远程仓库名） -->
+                            <repositoryName>maven-repository</repositoryName>
+                            <!--组织或用户名-->
+                            <repositoryOwner>Davisesr</repositoryOwner>
+                            <!-- 使用合并或覆盖内容 -->
+                            <merge>true</merge>
+                            <!--分支（固定写法：refs/heads/ + 你的分组）-->
+                            <branch>refs/heads/main</branch>
+                            <!--源文件地址-->
+                            <outputDirectory>${project.build.directory}/maven-repository</outputDirectory>
+                            <!-- 包含outputDirectory标签内填的文件夹中的所有内容 -->
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+        <!-- settings.xml中<servers>配置内容 -->
+        <!-- github仓库，id:自定义的服务名（唯一） -->
+        <!--
+            <server>
+                <id>dujy-github</id>
+                <password>你的github的token</password>
+            </server>
+        -->
